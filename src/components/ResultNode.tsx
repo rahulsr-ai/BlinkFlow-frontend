@@ -3,6 +3,9 @@ import { useStore } from "../../lib/Store";
 import axios from "axios";
 import { useState } from "react";
 
+
+const apiUrl = `${import.meta.env.VITE_API_URL}` || "http://localhost:8080";
+
 export function ResultNode() {
     const { result, status, prompt } = useStore();
     const [isSaving, setIsSaving] = useState(false);
@@ -15,7 +18,7 @@ export function ResultNode() {
         setIsSaving(true);
         try {
             // Updated route to /api/save-result as per your request
-            await axios.post('http://localhost:8080/api/save-result', {
+            await axios.post(`${apiUrl}/api/save-result`, {
                 result: result,
                 prompt: prompt
             });

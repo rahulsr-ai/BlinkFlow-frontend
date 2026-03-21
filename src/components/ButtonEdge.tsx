@@ -10,6 +10,7 @@ import axios from "axios";
 import { useStore } from '../../lib/Store';
 import { MousePointerClick } from 'lucide-react';
 
+const apiUrl = `${import.meta.env.VITE_API_URL}` || "http://localhost:8080";
 
 export default function ButtonEdge({
     sourceX,
@@ -40,7 +41,7 @@ export default function ButtonEdge({
                 return;
             }
             updateResult("Thinking...");
-            const res = await axios.post('http://localhost:8080/api/ask-ai', { prompt });
+            const res = await axios.post(`${apiUrl}/api/ask-ai`, { prompt });
             updateResult(res.data.data);
         } catch (err) {
             updateResult("Error fetching response");
