@@ -6,6 +6,31 @@
     width: 100%;
 }
 
+/* Processing Blue Glow */
+.glow-blue {
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+}
+
+/* Scanning Line Animation */
+.scanning-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+    animation: scan 2s linear infinite;
+    z-index: 20;
+}
+
+@keyframes scan {
+    0% { top: 0; opacity: 0; }
+    50% { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+}
+
+
+
 
 @keyframes border-march {
   from { background-position: 0 0, 100% 100%, 0 100%, 100% 0; }
@@ -13,7 +38,6 @@
 }
 
 .processing-node-border {
-  /* Blue/Indigo dashed lines using linear-gradients */
   background-image: 
     linear-gradient(90deg, #6366f1 50%, transparent 50%), 
     linear-gradient(0deg, #6366f1 50%, transparent 50%), 
@@ -24,7 +48,7 @@
   background-position: 0 0, 100% 0, 0 100%, 0 0;
   
   animation: border-march 0.4s infinite linear;
-  border: none !important; /* Standard border hata do kyunki background border ka kaam karega */
+  border: none !important; 
 }
 
 .glow-processing {

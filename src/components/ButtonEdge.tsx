@@ -32,7 +32,7 @@ export default function ButtonEdge({
         targetPosition,
     });
 
-    const { prompt, updateResult, setProcessing } = useStore();
+    const { prompt, updateResult, setStatus } = useStore();
 
     const onEdgeClick = async () => {
         // 1. Validation check BEFORE setting processing to true
@@ -41,7 +41,7 @@ export default function ButtonEdge({
             return;
         }
 
-        setProcessing(true);
+        setStatus('processing');
         updateResult("Thinking...");
 
         try {
@@ -50,16 +50,17 @@ export default function ButtonEdge({
             if (res.data.error) {
                 toast.error("Error: " + (res.data.msg || "Something went wrong"));
                 updateResult('Some error occurred');
+                setStatus('error')
             } else {
                 toast.success("Response generated!");
                 updateResult(res.data.data || "No data returned");
+                setStatus('success')
             }
         } catch (err) {
             console.error(err);
             updateResult("Error fetching response");
             toast.error("Network error. Please try again.");
-        } finally {
-            setProcessing(false);
+            setStatus('error')
         }
     };
 
