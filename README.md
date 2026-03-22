@@ -113,7 +113,6 @@ npm run dev
 
 
 * Drag & connect custom flows
-* Save user sessions
 * Better UI/UX enhancements
 
 ---
