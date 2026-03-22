@@ -1,73 +1,126 @@
-# React + TypeScript + Vite
+# 🚀 BlinkFlow AI – Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend of **BlinkFlow AI**, a simple and interactive web app where users can enter a prompt and instantly see the AI-generated response.
 
-Currently, two official plugins are available:
+Built using modern React tools and libraries, the app focuses on a clean UI and smooth user interaction.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* 🔹 Interactive flow-based UI using **React Flow**
+* 🔹 Global state management with **Zustand**
+* 🔹 Toast notifications using **React Toastify**
+* 🔹 Simple and minimal design
+* 🔹 Real-time prompt → response flow
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🧠 How It Works
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+* The app contains **2 nodes**:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+  * **Input Node** → User enters their prompt
+  * **Result Node** → Displays the AI response
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+* A **Run button** triggers the process:
+
+  1. User types a prompt in the Input Node
+  2. Clicks the Run button
+  3. Request is sent to the backend API
+  4. Response is displayed in the Result Node
+
+---
+
+## ⚙️ Setup Instructions
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/rahulsr-ai/BlinkFlow-frontend.git
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 2. Install Dependencies
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+---
+
+### 3. Setup Environment Variables
+
+Create a `.env.local` file in the root directory and add:
+
+```env
+VITE_API_URL="http://localhost:8080"
+```
+
+👉 Replace the URL with your backend server URL if different.
+
+---
+
+### 4. Setup Backend
+
+You can clone the backend from this repository:
+
+```bash
+git clone https://github.com/rahulsr-ai/BlinkFlow-backend.git
+```
+
+Then follow backend setup instructions and make sure it is running.
+
+---
+
+### 5. Run the Frontend
+
+```bash
+npm run dev
+```
+
+---
+
+## 🌐 Usage
+
+1. Open the app in your browser
+2. Enter your prompt in the **Input Node**
+3. Click the **button**
+4. View the response in the **Result Node**
+
+---
+
+## 🛠️ Tech Stack
+
+* React (Vite)
+* React Flow
+* Zustand
+* React Toastify
+* Tailwind CSS
+
+---
+
+## 📌 Notes
+
+* Make sure the backend server is running before using the app
+* Ensure `VITE_API_URL` is correctly set
+* If the API fails, a toast notification will show the error
+
+---
+
+## 💡 Future Improvements
+
+
+* Drag & connect custom flows
+* Save user sessions
+* Better UI/UX enhancements
+
+---
+
+## 👨‍💻 Author
+
+Developed by Rahul
+Feel free to explore, modify, and improve 🚀
+
+---
