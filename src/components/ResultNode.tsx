@@ -73,10 +73,17 @@ export function ResultNode() {
                     <div className={`w-2 h-2 rounded-full ${status === 'error' ? 'bg-red-500' : 'bg-stone-300'}`}></div>
                 </div>
             </div>
-
+            
             {/* Content Area */}
             <div className="p-4 bg-white relative">
-                <div id="text-display" className="nodrag w-full h-40 bg-transparent text-stone-800 font-mono text-sm leading-relaxed overflow-y-auto block whitespace-pre-wrap">
+                <div
+                    id="text-display"
+                    className="nowheel nodrag w-full h-40 bg-transparent text-stone-800 font-mono text-sm leading-relaxed overflow-y-auto block whitespace-pre-wrap"
+                    style={{
+                        pointerEvents: 'all',
+                        touchAction: 'auto'
+                    }}
+                >
                     {result || <span className="text-stone-400 opacity-50 italic">// Awaiting data stream...</span>}
                 </div>
 
