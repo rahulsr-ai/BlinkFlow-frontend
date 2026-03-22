@@ -2,7 +2,7 @@ import { Handle, Position } from "@xyflow/react";
 import { useStore } from "../../lib/Store";
 import axios from "axios";
 import { useState } from "react";
-
+import { toast } from 'react-toastify';
 
 const apiUrl = `${import.meta.env.VITE_API_URL}` || "http://localhost:8080";
 
@@ -17,16 +17,21 @@ export function ResultNode() {
 
         setIsSaving(true);
         try {
-            // Updated route to /api/save-result as per your request
-            await axios.post(`${apiUrl}/api/save-result`, {
+
+            const res = await axios.post(`${apiUrl}/api/save-result`, {
                 result: result,
                 prompt: prompt
             });
 
-            alert("Result saved successfully!");
+            if (res.data.error) {
+                toast.error("Failed to save result: " + res.data.message);
+            } else {
+                toast.success("Result saved successfully!");
+            }
+
         } catch (error) {
             console.error('Error occurred while saving the result', error);
-            alert("Failed to save result.");
+            toast.error("Network error: Failed to save result.");
         } finally {
             setIsSaving(false);
         }

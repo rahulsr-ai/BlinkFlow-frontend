@@ -2,13 +2,14 @@
 import {
     BaseEdge,
     EdgeLabelRenderer,
-    getBezierPath, 
+    getBezierPath,
     type EdgeProps,
 } from '@xyflow/react';
 
 import axios from "axios";
 import { useStore } from '../../lib/Store';
 import { MousePointerClick } from 'lucide-react';
+import { toast } from 'react-toastify';
 
 const apiUrl = `${import.meta.env.VITE_API_URL}` || "http://localhost:8080";
 
@@ -34,17 +35,30 @@ export default function ButtonEdge({
     const { prompt, updateResult, setProcessing } = useStore();
 
     const onEdgeClick = async () => {
+        // 1. Validation check BEFORE setting processing to true
+        if (!prompt || prompt.trim() === "") {
+            updateResult('Please provide a prompt before generating.');
+            return;
+        }
+
         setProcessing(true);
+        updateResult("Thinking...");
+
         try {
-            if (!prompt || prompt.trim() === "") {
-                updateResult('Please provide a prompt before generating.');
-                return;
-            }
-            updateResult("Thinking...");
             const res = await axios.post(`${apiUrl}/api/ask-ai`, { prompt });
-            updateResult(res.data.data);
+
+            if (res.data.error) {
+                toast.error("Error: " + (res.data.msg || "Something went wrong"));
+                updateResult('Some error occurred');
+            } else {
+                toast.success("Response generated!");
+                updateResult(res.data.data || "No data returned");
+            }
         } catch (err) {
+            console.error(err);
             updateResult("Error fetching response");
+            toast.error("Network error. Please try again.");
+        } finally {
             setProcessing(false);
         }
     };
@@ -68,7 +82,6 @@ export default function ButtonEdge({
                         className="w-8 h-8 bg-white border border-stone-200 rounded-full shadow-lg flex items-center justify-center hover:bg-stone-50 hover:scale-110 transition-all active:scale-90 text-green-500 font-bold cursor-pointer"
                         onClick={onEdgeClick}
                     >
-                        {/* <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-send-icon lucide-send"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" /><path d="m21.854 2.147-10.94 10.939" /></svg> */}
                         <MousePointerClick size={16} className="rotate-90" />
                     </button>
                 </div>

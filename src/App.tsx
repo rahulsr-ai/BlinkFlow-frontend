@@ -2,13 +2,12 @@ import { addEdge, applyEdgeChanges, applyNodeChanges, Background, BackgroundVari
 import { useCallback, useState } from "react"
 import '@xyflow/react/dist/style.css';
 import { edgeTypes, initialEdges, initialNodes, nodeTypes } from "./nodes/nodes";
-
+import { ToastContainer } from 'react-toastify';
 
 
 const App = () => {
   const [nodes, setNodes] = useState(initialNodes);
   const [edges, setEdges] = useState(initialEdges);
-
 
 
   const onNodesChange = useCallback(
@@ -29,61 +28,36 @@ const App = () => {
 
   return (
     <>
-      <div className="w-screen h-screen  flex flex-col">
-        {/* Header ko absolute rakho taki flow ke upar dikhe */}
+      <div className="w-screen h-screen flex flex-col">
+
         <div className="absolute top-10 left-1/2 -translate-x-1/2 z-10 pointer-events-none  w-full text-center">
           <h1 className="text-5xl md:text-7xl font-extrabold tracking-wide l  ">
             BlinkFlow <span className="text-green-500">AI</span>
           </h1>
         </div>
 
-        {/* ReactFlow hi nodes ko render karega */}
+        {/* Render ReactFlow nodes */}
         <ReactFlow
           nodes={nodes}
           edges={edges}
           nodeTypes={nodeTypes}
-          edgeTypes={edgeTypes} // Yahan edgeTypes pass karna zaruri hai
+          edgeTypes={edgeTypes} 
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
-          onConnect={onConnect} // Connection functionality
+          onConnect={onConnect} 
           fitView
         >
 
-          <Background variant={BackgroundVariant.Lines}/> 
-          <Controls/>
+          <Background variant={BackgroundVariant.Lines} />
+          <Controls />
 
-          {/* Background aur Controls yahan aayenge */}
+
         </ReactFlow>
       </div>
 
-
+      <ToastContainer />
     </>
   )
 }
 
 export default App
-
-
-
-/* 
-
- return (
-    <>
-         
-          
-
-      <ReactFlow
-        nodes={nodes}
-        edges={edges}
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
-        nodeTypes={nodeTypes}
-        fitView
-      >
-        <Background variant={BackgroundVariant.Lines} color="blue" gap={44} />
-        <Controls />
-      </ReactFlow>
-    </>
-  )
-    
-*/

@@ -23,7 +23,7 @@ export const nodeTypes = {
   resultReceiver: ResultNode,
 };
 
-// Custom Edge type register karo
+
 export const edgeTypes = {
   animatedNode: ButtonEdge,
 };
